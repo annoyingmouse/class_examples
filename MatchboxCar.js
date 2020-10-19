@@ -58,7 +58,7 @@ function MatchboxCar(id, model, num, brand, year, location, description) {
 }
 
 /**
- * Add image.
+ * Create element and set attributes.
  *
  * @param {Object} obj - The attributes of the element.
  * @param {string} el - The element to be created, defaults to Content Division.
