@@ -27,7 +27,7 @@ function MatchboxCar(
   this.location = location;
   this.description = description;
   this.images = [];
-}
+};
 
 /**
  * Display item.
@@ -101,9 +101,14 @@ MatchboxCar.prototype.display = function(target) {
     }
   }
   if (this.description) {
+    var details = document.createElement("details");
+    cardBody.appendChild(details);
+    var summary = document.createElement("summary");
+    details.appendChild(summary);
+    summary.textContent = "Description";
     var p = document.createElement("p");
     p.textContent = this.description;
-    cardBody.appendChild(p);
+    details.appendChild(p);
   }
 };
 
@@ -114,7 +119,7 @@ var javalin = new MatchboxCar(
     "Superfast 1-75",
     1972,
     "England",
-    "Bacon ipsum dolor amet fatback boudin frankfurter venison."
+    "Matchbox Superfast No 9 AMX Javelin WHITE Interior MIB RARE. Model Condition: Original and Mint, Box Condition: Original and Near Mint, label on one striker side of box. No missing end or tuck in flaps."
 );
 javalin.images.push("https://dummyimage.com/378x370");
 javalin.images.push("https://dummyimage.com/378x385");
@@ -128,7 +133,7 @@ var FordGroup6 = new MatchboxCar(
     "Superfast 1-75",
     1972,
     "England",
-    "Rump capicola biltong bacon, shankle sirloin pancetta filet mignon."
+    "Matchbox Superfast no MB 45 a Ford Group 6 in Metallic Magenta Gloss black Painted Base Light Amber Tinted windows Ivory Interior 5 Spoke Wheels"
 );
 FordGroup6.images.push("https://dummyimage.com/211x209");
 FordGroup6.images.push("https://dummyimage.com/211");
@@ -142,7 +147,7 @@ var FordGT = new MatchboxCar(
     "Superfast 1-75",
     1972,
     "England",
-    "Sirloin turkey cupim pork loin doner beef buffalo pig porchetta ribeye leberkas."
+    "1970s. Matchbox Superfast. 41 Ford GT 40 Bronze with Black base F1.Indy.Mint in box.original. Original box is complete with all flaps."
 );
 FordGT.images.push("https://dummyimage.com/347");
 FordGT.images.push("https://dummyimage.com/347x337");
@@ -156,7 +161,7 @@ var MerryweatherMarquisFireEngine = new MatchboxCar(
     "Superfast 1-75",
     1972,
     "England",
-    "Shank kevin rump, capicola biltong chicken doner short loin pork shankle sausage pancetta."
+    "One of the lights on the top side of the truck is slightly pushed down. The labels are slightly torn and one of the front wheels is slightly bent."
 );
 MerryweatherMarquisFireEngine.images.push("https://dummyimage.com/435x425");
 MerryweatherMarquisFireEngine.images.push("https://dummyimage.com/435x437");
@@ -170,7 +175,7 @@ var LotusEuropa = new MatchboxCar(
     "Superfast",
     1974,
     "England",
-    "Filet mignon short ribs boudin buffalo."
+    "Matchbox Lesney Superfast MB 5 Lotus Europa - RARE JPS ISSUE. Condition is \"Used\"."
 );
 LotusEuropa.images.push("https://dummyimage.com/316x309");
 LotusEuropa.images.push("https://dummyimage.com/316");
@@ -184,7 +189,7 @@ var ChevroletCorvette = new MatchboxCar(
     "Superfast 1-75",
     1979,
     "MACAU",
-    "Pastrami tail prosciutto landjaeger jerky ground round."
+    "MATCHBOX No.62 CHEVROLET CORVETTE YELLOW/PURPLE"
 );
 ChevroletCorvette.images.push("https://dummyimage.com/232x212");
 ChevroletCorvette.images.push("https://dummyimage.com/316");

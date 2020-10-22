@@ -50,12 +50,14 @@ function MatchboxCar(id, model, num, brand, year, location, description) {
   Object.defineProperty(this, "images", {
     get: function() {
       return images;
-    },
-    set: function(uri) {
-      this.images.push(uri);
     }
   });
-}
+  Object.defineProperty(this, "add_image", {
+    set: function(url) {
+      this.images.push(url);
+    }
+  });
+};
 
 /**
  * Create element and set attributes.
@@ -74,6 +76,19 @@ MatchboxCar.prototype.createElemWithAttributes = function(obj, el) {
   return element;
 };
 
+/**
+ * Create element with attributes and set text.
+ *
+ * @param {Object} obj - The attributes of the element.
+ * @param {string} el - The element to be created, defaults to Content Division.
+ * @param {string} text - the text content of the element.
+ */
+MatchboxCar.prototype.createRichElement = function(obj, el, text) {
+  var element = this.createElemWithAttributes (obj, el);
+  element.textContent = text;
+  return element;
+};
+
 
 /**
  * Create a dt/dd pair and append to target.
@@ -83,12 +98,8 @@ MatchboxCar.prototype.createElemWithAttributes = function(obj, el) {
  * @param {String} DL - The Description List.
  */
 MatchboxCar.prototype.createDefinitionPair = function(dt, dd, dl) {
-  var DT = document.createElement("dt");
-  DT.textContent = dt;
-  dl.appendChild(DT);
-  var DD = document.createElement("dd");
-  DD.textContent = dd;
-  dl.appendChild(DD);
+  dl.appendChild(this.createRichElement({}, "dt", dt));
+  dl.appendChild(this.createRichElement({}, "dd", dd));
 };
 
 /**
@@ -131,14 +142,12 @@ MatchboxCar.prototype.display = function(target) {
     "class": "card-body"
   });
   card.appendChild(cardBody);
-  var hFive = document.createElement("h5");
-  hFive.textContent = this.model;
+  var hFive = this.createRichElement({}, "h5", this.model);
   var br = document.createElement("br");
   hFive.appendChild(br);
-  var yearSmall = this.createElemWithAttributes({
+  var yearSmall = this.createRichElement({
     "class": "text-muted"
-  }, "small");
-  yearSmall.textContent = this.year;
+  }, "small", this.year);
   hFive.appendChild(yearSmall);
   cardBody.appendChild(hFive);
   if (this.num || this.brand || this.location) {
@@ -155,9 +164,10 @@ MatchboxCar.prototype.display = function(target) {
     }
   }
   if (this.description) {
-    var p = document.createElement("p");
-    p.textContent = this.description;
-    cardBody.appendChild(p);
+    var details = document.createElement("details");
+    cardBody.appendChild(details);
+    details.appendChild(this.createRichElement({}, "summary", "Description"));
+    details.appendChild(this.createRichElement({}, "p", this.description));
   }
 };
 
@@ -170,9 +180,9 @@ var javalin = new MatchboxCar(
     "England",
     "Matchbox Superfast No 9 AMX Javelin WHITE Interior MIB RARE. Model Condition: Original and Mint, Box Condition: Original and Near Mint, label on one striker side of box. No missing end or tuck in flaps. "
 );
-javalin.images = "https://dummyimage.com/378x370";
-javalin.images = "https://dummyimage.com/378x385";
-javalin.images = "https://dummyimage.com/378";
+javalin.add_image = "https://dummyimage.com/378x370";
+javalin.add_image = "https://dummyimage.com/378x385";
+javalin.add_image = "https://dummyimage.com/378";
 javalin.display("collection");
 
 var FordGroup6 = new MatchboxCar(
@@ -184,9 +194,9 @@ var FordGroup6 = new MatchboxCar(
     "England",
     "Matchbox Superfast no MB 45 a Ford Group 6 in Metallic Magenta Gloss black Painted Base Light Amber Tinted windows Ivory Interior 5 Spoke Wheels"
 );
-FordGroup6.images = "https://dummyimage.com/211x209";
-FordGroup6.images = "https://dummyimage.com/211";
-FordGroup6.images = "https://dummyimage.com/211x218";
+FordGroup6.add_image = "https://dummyimage.com/211x209";
+FordGroup6.add_image = "https://dummyimage.com/211";
+FordGroup6.add_image = "https://dummyimage.com/211x218";
 FordGroup6.display("collection");
 
 var FordGT = new MatchboxCar(
@@ -198,9 +208,9 @@ var FordGT = new MatchboxCar(
     "England",
     "1970s. Matchbox Superfast. 41 Ford GT 40 Bronze with Black base F1.Indy.Mint in box.original. Original box is complete with all flaps."
 );
-FordGT.images = "https://dummyimage.com/347";
-FordGT.images = "https://dummyimage.com/347x337";
-FordGT.images = "https://dummyimage.com/347x355";
+FordGT.add_image = "https://dummyimage.com/347";
+FordGT.add_image = "https://dummyimage.com/347x337";
+FordGT.add_image = "https://dummyimage.com/347x355";
 FordGT.display("collection");
 
 var MerryweatherMarquisFireEngine = new MatchboxCar(
@@ -212,9 +222,9 @@ var MerryweatherMarquisFireEngine = new MatchboxCar(
     "England",
     "One of the lights on the top side of the truck is slightly pushed down. The labels are slightly torn and one of the front wheels is slightly bent."
 );
-MerryweatherMarquisFireEngine.images = "https://dummyimage.com/435x425";
-MerryweatherMarquisFireEngine.images = "https://dummyimage.com/435x437";
-MerryweatherMarquisFireEngine.images = "https://dummyimage.com/435";
+MerryweatherMarquisFireEngine.add_image = "https://dummyimage.com/435x425";
+MerryweatherMarquisFireEngine.add_image = "https://dummyimage.com/435x437";
+MerryweatherMarquisFireEngine.add_image = "https://dummyimage.com/435";
 MerryweatherMarquisFireEngine.display("collection");
 
 var LotusEuropa = new MatchboxCar(
@@ -226,9 +236,9 @@ var LotusEuropa = new MatchboxCar(
     "England",
     "Matchbox Lesney Superfast MB 5 Lotus Europa - RARE JPS ISSUE. Condition is \"Used\"."
 );
-LotusEuropa.images = "https://dummyimage.com/316x309";
-LotusEuropa.images = "https://dummyimage.com/316";
-LotusEuropa.images = "https://dummyimage.com/316x317";
+LotusEuropa.add_image = "https://dummyimage.com/316x309";
+LotusEuropa.add_image = "https://dummyimage.com/316";
+LotusEuropa.add_image = "https://dummyimage.com/316x317";
 LotusEuropa.display("collection");
 
 var ChevroletCorvette = new MatchboxCar(
@@ -240,7 +250,7 @@ var ChevroletCorvette = new MatchboxCar(
     "MACAU",
     "MATCHBOX No.62 CHEVROLET CORVETTE YELLOW/PURPLE"
 );
-ChevroletCorvette.images = "https://dummyimage.com/232x212";
-ChevroletCorvette.images = "https://dummyimage.com/316";
-ChevroletCorvette.images = "https://dummyimage.com/316x317";
+ChevroletCorvette.add_image = "https://dummyimage.com/232x212";
+ChevroletCorvette.add_image = "https://dummyimage.com/316";
+ChevroletCorvette.add_image = "https://dummyimage.com/316x317";
 ChevroletCorvette.display("collection");

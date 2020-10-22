@@ -73,7 +73,7 @@ export class ToyCar {
    * Adds an image to the #images array of the model
    * @param {string} url - The url of an image of the model.
    */
-  addImage(url){
+  add_image(url){
     this.#images.push(url)
   }
 
@@ -142,9 +142,10 @@ export class ToyCar {
             </small>
           </h5>
           ${this.createDefinitionList()}
-          <p>
-            ${this.#description}
-          </p>
+          <details>
+            <summary>Description</summary>
+            <p>${this.#description}</p>
+          </details>
         </div>
       </div>
     `

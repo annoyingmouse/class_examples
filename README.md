@@ -1,6 +1,8 @@
 # JavaScript classes (ES5 and ES6)
  
 [![](https://1.bp.blogspot.com/-eHHo40uwhEI/X4_wt1I04EI/AAAAAAAAoZ4/Wi8Z3FVke_IQJEIZ51o93W4ZqUjftSFLACLcBGAsYHQ/s400/orange_and_white_chevrolet_camaro-scopio-f4ec5a0d-39ba-4514-9e12-83a6093a3124.jpg)](https://1.bp.blogspot.com/-eHHo40uwhEI/X4_wt1I04EI/AAAAAAAAoZ4/Wi8Z3FVke_IQJEIZ51o93W4ZqUjftSFLACLcBGAsYHQ/s2048/orange_and_white_chevrolet_camaro-scopio-f4ec5a0d-39ba-4514-9e12-83a6093a3124.jpg)
+
+
 <label style="display:flex; justify-content: start; align-items: center; font-family: Barlow"><a style="display:flex; align-items: center" href="https://scop.io"><img height="20x" src="https://cdn.shopify.com/s/files/1/2395/7099/t/46/assets/icon_2x.png?v=17766308506443902960" style="margin: 0px 10px 0px 0px"></a> By <a style="text-decoration: none; margin: 0px 5px;" href="/collections/vendors?q=Marco+Antonio+Martinez+Soto">Marco Antonio Martinez Soto</a></label>
 
 Imagine you're a collector, we don't care what it is you collect; it could be matchbox cars, real cars or matchboxes. You do, however, care about cataloguing your collection and sharing its details with other collectors (after first checking your locks are secure). You've spent some time thinking about normalizing the data for inclusion in a database and crafted a secure mechanism which allows you to update your collection online. Brilliant! Now it comes to displaying your collection to your peers, how would you do that?
@@ -101,9 +103,11 @@ function MatchboxCar(id, model, num, brand, year, location, description) {
   Object.defineProperty(this, "images", {
     get: function() {
       return images;
-    },
-    set: function(uri) {
-      this.images.push(uri);
+    }
+  });
+  Object.defineProperty(this, "add_image", {
+    set: function(url) {
+      this.images.push(url);
     }
   });
 };
@@ -184,9 +188,14 @@ MatchboxCar.prototype.display = function(target) {
     }
   }
   if (this.description) {
+    var details = document.createElement("details");
+    cardBody.appendChild(details);
+    var summary = document.createElement("summary");
+    details.appendChild(summary);
+    summary.textContent = "Description";
     var p = document.createElement("p");
     p.textContent = this.description;
-    cardBody.appendChild(p);
+    details.appendChild(p);
   }
 };
 ```
@@ -212,6 +221,20 @@ MatchboxCar.prototype.createElemWithAttributes = function(obj, el) {
 };
 
 /**
+ * Create element with attributes and set text.
+ *
+ * @param {Object} obj - The attributes of the element.
+ * @param {string} el - The element to be created, defaults to Content Division.
+ * @param {string} text - the text content of the element.
+ */
+MatchboxCar.prototype.createRichElement = function(obj, el, text) {
+  var element = this.createElemWithAttributes (obj, el);
+  element.textContent = text;
+  return element;
+};
+
+
+/**
  * Create a dt/dd pair and append to target.
  *
  * @param {String} DT - The Description Term.
@@ -219,12 +242,8 @@ MatchboxCar.prototype.createElemWithAttributes = function(obj, el) {
  * @param {String} DL - The Description List.
  */
 MatchboxCar.prototype.createDefinitionPair = function(dt, dd, dl) {
-  var DT = document.createElement("dt");
-  DT.textContent = dt;
-  dl.appendChild(DT);
-  var DD = document.createElement("dd");
-  DD.textContent = dd;
-  dl.appendChild(DD);
+  dl.appendChild(this.createRichElement({}, "dt", dt));
+  dl.appendChild(this.createRichElement({}, "dd", dd));
 };
 
 /**
@@ -267,14 +286,12 @@ MatchboxCar.prototype.display = function(target) {
     "class": "card-body"
   });
   card.appendChild(cardBody);
-  var hFive = document.createElement("h5");
-  hFive.textContent = this.model;
+  var hFive = this.createRichElement({}, "h5", this.model);
   var br = document.createElement("br");
   hFive.appendChild(br);
-  var yearSmall = this.createElemWithAttributes({
+  var yearSmall = this.createRichElement({
     "class": "text-muted"
-  }, "small");
-  yearSmall.textContent = this.year;
+  }, "small", this.year);
   hFive.appendChild(yearSmall);
   cardBody.appendChild(hFive);
   if (this.num || this.brand || this.location) {
@@ -291,9 +308,10 @@ MatchboxCar.prototype.display = function(target) {
     }
   }
   if (this.description) {
-    var p = document.createElement("p");
-    p.textContent = this.description;
-    cardBody.appendChild(p);
+    var details = document.createElement("details");
+    cardBody.appendChild(details);
+    details.appendChild(this.createRichElement({}, "summary", "Description"));
+    details.appendChild(this.createRichElement({}, "p", this.description));
   }
 };
 ```
@@ -363,7 +381,9 @@ function ToyCar(manufacturer, id, model, num, brand, year, location, description
   Object.defineProperty(this, "images", {
     get: function() {
       return images;
-    },
+    }
+  });
+  Object.defineProperty(this, "add_image", {
     set: function(uri) {
       this.images.push(uri);
     }
@@ -378,7 +398,7 @@ ToyCar.prototype.createHeader = function(){
 };
 
 /**
- * Add image.
+ * Create element and set attributes.
  *
  * @param {Object} obj - The attributes of the element.
  * @param {string} el - The element to be created, defaults to Content Division.
@@ -391,6 +411,19 @@ ToyCar.prototype.createElemWithAttributes = function(obj, el) {
       element.setAttribute(key, obj[key]);
     }
   }
+  return element;
+};
+
+/**
+ * Create element with attributes and set text.
+ *
+ * @param {Object} obj - The attributes of the element.
+ * @param {string} el - The element to be created, defaults to Content Division.
+ * @param {string} text - the text content of the element.
+ */
+ToyCar.prototype.createRichElement = function(obj, el, text) {
+  var element = this.createElemWithAttributes (obj, el);
+  element.textContent = text;
   return element;
 };
 
@@ -417,12 +450,8 @@ ToyCar.prototype.createDefinitionList = function(target) {
  * @param {String} DL - The Description List.
  */
 ToyCar.prototype.createDefinitionPair = function(dt, dd, dl) {
-  var DT = document.createElement("dt");
-  DT.textContent = dt;
-  dl.appendChild(DT);
-  var DD = document.createElement("dd");
-  DD.textContent = dd;
-  dl.appendChild(DD);
+  dl.appendChild(this.createRichElement({}, "dt", dt));
+  dl.appendChild(this.createRichElement({}, "dd", dd));
 };
 
 /**
@@ -466,21 +495,20 @@ ToyCar.prototype.display = function(target) {
     "class": "card-body"
   });
   card.appendChild(cardBody);
-  var hFive = document.createElement("h5");
-  hFive.textContent = this.model;
+  var hFive = this.createRichElement({}, "h5", this.model);
   var br = document.createElement("br");
   hFive.appendChild(br);
-  var yearSmall = this.createElemWithAttributes({
+  var yearSmall = this.createRichElement({
     "class": "text-muted"
-  }, "small");
-  yearSmall.textContent = this.year;
+  }, "small", this.year);
   hFive.appendChild(yearSmall);
   cardBody.appendChild(hFive);
   this.createDefinitionList(cardBody);
   if (this.description) {
-    var p = document.createElement("p");
-    p.textContent = this.description;
-    cardBody.appendChild(p);
+    var details = document.createElement("details");
+    cardBody.appendChild(details);
+    details.appendChild(this.createRichElement({}, "summary", "Description"));
+    details.appendChild(this.createRichElement({}, "p", this.description));
   }
 };
 ```
@@ -502,7 +530,7 @@ Your decision to not use the model number as the primary key for the Database is
  */
 function MatchboxCar(manufacturer, id, model, num, brand, year, location, description) {
   ToyCar.call(this, manufacturer, id, model, num, brand, year, location, description);
-}
+};
 MatchboxCar.prototype = Object.create(ToyCar.prototype);
 MatchboxCar.prototype.constructor = MatchboxCar;
 
@@ -534,7 +562,7 @@ function DinkyCar(manufacturer, id, model, num, num_new, brand, year, location, 
       return num_new;
     }
   });
-}
+};
 DinkyCar.prototype = Object.create(ToyCar.prototype);
 DinkyCar.prototype.constructor = DinkyCar;
 
@@ -563,7 +591,7 @@ DinkyCar.prototype.createDefinitionList = function(target) {
     this.brand && this.createDefinitionPair("Brand", this.brand, dl);
     this.location && this.createDefinitionPair("Made in", this.location, dl);
   }
-}
+};
 ```
 
 You've managed to include the four main concepts of OOP in the development of your ToyCar class. You've **encapsulated** the variables and functions within several classes. You've **abstracted** the variables of the object; protecting those variables which need to remain private. Your child classes **inherit** from a parent class. Finally, you've created some **polymorphism** in that both the MatchboxCar and DinkyCar classes override the `createHeader` stub function of the ToyCar class. Smart old stick aren't you?
@@ -583,7 +611,7 @@ class ToyCar {
   #description
   #images
 
-  constructor(id, model, num, brand, year, location, description){
+  constructor(id, model, num, brand, year, location, description, images = []){
     this.#id = id
     this.#model = model
     this.#num = num
@@ -591,7 +619,7 @@ class ToyCar {
     this.#year = year
     this.#location = location
     this.#description = description
-    this.#images = []
+    this.#images = Array.isArray(images) ? images : []
   }
 
   get num() {
@@ -606,7 +634,7 @@ class ToyCar {
     return this.#location
   }
 
-  addImage(url){
+  add_image(url){
     this.#images.push(url)
   }
 
@@ -651,9 +679,10 @@ class ToyCar {
             </small>
           </h5>
           ${this.createDefinitionList()}
-          <p>
-            ${this.#description}
-          </p>
+          <details>
+            <summary>Description</summary>
+            <p>${this.#description}</p>
+          </details>
         </div>
       </div>
     `
@@ -681,8 +710,8 @@ class DinkyCar extends ToyCar {
   #num_new
   #manufacturer
 
-  constructor(manufacturer, id, model, num, num_new, brand, year, location, description) {
-    super(id, model, num, brand, year, location, description)
+  constructor(manufacturer, id, model, num, num_new, brand, year, location, description, images) {
+    super(id, model, num, brand, year, location, description, images)
     this.#manufacturer = manufacturer
     this.#num_new = num_new
   }
@@ -713,4 +742,4 @@ The MatchboxCar class, which extends or inherits from ToyCar, plays fast and loo
 
 We can take advantage of [Export and Import](https://javascript.info/import-export) directives to further improve the legibility of our code. If we split up our classes into separate files, then we can export and import them only as and when required. We do need to be careful to tell the browser to be patient though, so we can inform the JavaScript engine that we're working with modules by using the type attribute on the script element and setting it to the type `module`. This modularisation does lead to far more clean looking code but will fail on earlier browsers so it might be worth using something like [rollup](https://rollupjs.org/guide/en/) - but as things stand your lovely code is only going to work well on Chrome. Firefox doesn't yet support private fields, you see - I dare say it will soon, but at present, it doesn't. Fingers crossed for the future though!
 
-I hope you've enjoyed reading this as much as I have enjoyed writing it - it's going to be a chapter in my next book, but I thought it'd work well as a standalone piece in its own right. The working code is on [repl.it](https://repl.it/@annoyingmouse/ES5-Class-Example) so please do have a play. I've come an awful long way since answering, "OOP is a solution looking for a problem". Something I said when asked to explain what OOP was way back when in an interview - what a plonker! We've looked a the four main Object-oriented concepts ([as explained to a 6-year-old](https://www.educative.io/edpresso/object-oriented-concepts-as-explained-to-a-6-year-old))
+I hope you've enjoyed reading this as much as I have enjoyed writing it - it's going to be a chapter in my next book, but I thought it'd work well as a standalone piece in its own right. The working code is on [repl.it](https://repl.it/@annoyingmouse/ES5-Class-Example) so please do have a play. I've come an awful long way since answering, "OOP is a solution looking for a problem". Something I said when asked to explain what OOP was way back when in an interview - what a plonker! We've looked at the four main Object-oriented concepts ([as explained to a 6-year-old](https://www.educative.io/edpresso/object-oriented-concepts-as-explained-to-a-6-year-old))
