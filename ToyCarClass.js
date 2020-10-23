@@ -7,6 +7,7 @@ class ToyCar {
   #location
   #description
   #images
+  #open
 
   constructor(id, model, num, brand, year, location, description, images = []){
     this.#id = id
@@ -136,7 +137,7 @@ const javalin = new MatchboxCar(
     'Superfast 1-75',
     1972,
     'England',
-    'Matchbox Superfast No 9 AMX Javelin WHITE Interior MIB RARE. Model Condition: Original and Mint, Box Condition: Original and Near Mint, label on one striker side of box. No missing end or tuck in flaps.' // description
+    'Matchbox Superfast No 9 AMX Javelin WHITE Interior MIB RARE. Model Condition: Original and Mint, Box Condition: Original and Near Mint, label on one striker side of box. No missing end or tuck in flaps.'
 )
 javalin.add_image('https://dummyimage.com/378x370')
 javalin.add_image('https://dummyimage.com/378x385')
@@ -151,7 +152,7 @@ const FordGroup6 = new MatchboxCar(
     'Superfast 1-75',
     1972,
     'England',
-    'Matchbox Superfast no MB 45 a Ford Group 6 in Metallic Magenta Gloss black Painted Base Light Amber Tinted windows Ivory Interior 5 Spoke Wheels' // description
+    'Matchbox Superfast no MB 45 a Ford Group 6 in Metallic Magenta Gloss black Painted Base Light Amber Tinted windows Ivory Interior 5 Spoke Wheels'
 )
 FordGroup6.add_image('https://dummyimage.com/211x209')
 FordGroup6.add_image('https://dummyimage.com/211')
@@ -166,7 +167,7 @@ const FordGT = new MatchboxCar(
     'Superfast 1-75',
     1972,
     'England',
-    '1970s. Matchbox Superfast. 41 Ford GT 40 Bronze with Black base F1.Indy.Mint in box.original. Original box is complete with all flaps.' // description
+    '1970s. Matchbox Superfast. 41 Ford GT 40 Bronze with Black base F1.Indy.Mint in box.original. Original box is complete with all flaps.'
 )
 FordGT.add_image('https://dummyimage.com/347')
 FordGT.add_image('https://dummyimage.com/347x337')
@@ -181,7 +182,7 @@ const MerryweatherMarquisFireEngine = new MatchboxCar(
     'Superfast 1-75',
     1972,
     'England',
-    'One of the lights on the top side of the truck is slightly pushed down. The labels are slightly torn and one of the front wheels is slightly bent.' // description
+    'One of the lights on the top side of the truck is slightly pushed down. The labels are slightly torn and one of the front wheels is slightly bent.'
 )
 MerryweatherMarquisFireEngine.add_image('https://dummyimage.com/435x425')
 MerryweatherMarquisFireEngine.add_image('https://dummyimage.com/435x437')
@@ -229,9 +230,7 @@ const rileySaloon = new DinkyCar(
     'England',
     'Green body with green ridged hubs, "First Version" which has the tin-plate base with the axles held by cast pillars at the rear and integral castings at the front.',
     ['https://dummyimage.com/388x380', 'https://dummyimage.com/388x395', 'https://dummyimage.com/388']
-
-)
-rileySaloon.display('collection')
+).display('collection')
 
 const foden8WheelWagon = new DinkyCar(
     'Dinky',
@@ -244,5 +243,4 @@ const foden8WheelWagon = new DinkyCar(
     'England',
     'This is a very scarce early issue dark grey 1st cab Foden Wagon with a red chassis and red ridged wheels and cab side flashes. This was the last colour run for this first phase of production for 1st cab wagons and would usually have no mount block for a rear tow hook and no tank slots which were both not introduced until October 1948. However a few examples at the end of this first production phase received the mount block and a small unpainted hook and this is why this model is particularly scarce. It also helps to confirm some of the known date changes of the parts. It continues to have no casting support for the chain posts underneath as this was not introduced until January 1952. There is a spare tyre mounted to the chassis by a correct silver nut and bolt. Please note that a black nut and bolt were not issued for any 1st cab model. Finally as an early release it has the black herringbone original tyres which are now hardened but have no flats and a full "20mph" transfer on the rear left wheel arch.',
     ['https://dummyimage.com/368x360', 'https://dummyimage.com/368x375','https://dummyimage.com/368']
-)
-foden8WheelWagon.display('collection')
+).display('collection')
