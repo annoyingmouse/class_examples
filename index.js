@@ -2,9 +2,11 @@
  * Create bundle using:
  * `rollup index.js --file bundle.js --format iife`
  * or (with rollup.config.js): `rollup --config`
+ * or (now with npm): npm run build
  */
 import {MatchboxCar} from './classes/MatchboxCar.js'
 import {DinkyCar} from './classes/DinkyCar.js'
+
 
 var javalin = new MatchboxCar(
     'Matchbox', // manufacturer
