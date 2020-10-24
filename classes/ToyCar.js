@@ -42,7 +42,7 @@ export class ToyCar {
     this.#year = year
     this.#location = location
     this.#description = description
-    this.#images = images
+    this.#images = Array.isArray(images) ? images : []
   }
 
   /**

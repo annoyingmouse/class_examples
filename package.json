@@ -1,0 +1,26 @@
+{
+  "name": "es5_class-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "build": "rollup --config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annoyingmouse/class_examples.git"
+  },
+  "author": "Dominic Myers <annoyingmouse@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annoyingmouse/class_examples/issues"
+  },
+  "homepage": "https://github.com/annoyingmouse/class_examples#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@rollup/plugin-babel": "^5.2.1",
+    "rollup": "^2.32.1"
+  }
+}

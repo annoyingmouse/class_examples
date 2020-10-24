@@ -31,7 +31,8 @@ export class DinkyCar extends ToyCar {
       brand,
       year,
       location,
-      description
+      description,
+      images
   ) {
     super(
         id,
@@ -40,7 +41,8 @@ export class DinkyCar extends ToyCar {
         brand,
         year,
         location,
-        description
+        description,
+        images
     )
     this.#manufacturer = manufacturer
     this.#num_new = num_new
