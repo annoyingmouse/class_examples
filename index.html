@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width">
   <title>ES5 Class Example</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="./style/details.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -17,12 +18,30 @@
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-details/0.1.0/jquery.details.min.js"></script>
 <!--<script src="MatchboxCar_original.js"></script>-->
 <!--<script src="MatchboxCar.js"></script>-->
 <!--<script src="ToyCar.js"></script>-->
 <!--<script src="ToyCarClass.js"></script>-->
 <!--<script src="index.js" type="module"></script>-->
 <script src="bundle.js"></script>
+<script>
+  $(document).ready(function(){
+    $('html').addClass($.fn.details.support ? 'details' : 'no-details');
+    // Emulate <details> where necessary and enable open/close event handlers
+    $('details').details();
+
+    // Bind some example event handlers
+    $('details').on({
+      'open.details': function() {
+        console.log('opened');
+      },
+      'close.details': function() {
+        console.log('closed');
+      }
+    });
+  });
+</script>
 </body>
 
 </html>
