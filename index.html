@@ -25,22 +25,10 @@
 <!--<script src="ToyCarClass.js"></script>-->
 <!--<script src="index.js" type="module"></script>-->
 <script src="bundle.js"></script>
-<script>
-  $(document).ready(function(){
-    $('html').addClass($.fn.details.support ? 'details' : 'no-details');
-    // Emulate <details> where necessary and enable open/close event handlers
-    $('details').details();
-
-    // Bind some example event handlers
-    $('details').on({
-      'open.details': function() {
-        console.log('opened');
-      },
-      'close.details': function() {
-        console.log('closed');
-      }
-    });
-  });
+<script type="text/javascript">
+  if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)){
+    document.write('<script src="detail.js"><\/script>');
+  }
 </script>
 </body>
 
