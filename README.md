@@ -13,7 +13,7 @@ You know the items in your collection very well, you've spent some time thinking
 
 To some extent identifying matchbox cars is dead easy, they have writing on the bottom after all. There's the name of the vehicle, the year of production; sometimes there's a number. There is also where they were built. You have some duplicates, so you'll need a field for a description so that you can distinguish between the copies. You've invested some time taking pictures and uploading them to an S3 bucket, some you've even taken multiple images of, so you'll need an array of image URIs as well, which you can display in a slideshow. That array might be empty though as you don't take a picture immediately after cataloguing them.
 
-In the bad old days, JavaScript wasn't a class-based object-oriented language (and perhaps it still isn't), it was prototype-based, but what does that mean? JS classes used to be written as functions so that you could write your Matchbox car like this:
+In the bad old days, JavaScript wasn't a class-based object-oriented language (and perhaps it still isn't), it was prototype-based, but what does that mean? JS classes used to be written as functions so that you could write your Matchbox car like [this](https://github.com/annoyingmouse/class_examples/blob/main/js/MatchboxCar_original.js):
 
 ```javascript
 /**
@@ -48,7 +48,7 @@ function MatchboxCar(
 };
 ```
 
-Writing it that way all is not ideal though, all the details of the car are available to anyone with the developer console open. It's just not right that all those fields are available for any Tom, Dick or Harry to look at - some things should remain hidden. You know your fellow collectors and can imagine how much they'd relish pointing out a fault in your collection, so you decide to protect the data and make the attributes private. The protection of internal class variables is by no means a bullet-proof way of avoiding your fellow collectors taking the Mickey, but it'll have to do. With this in mind, you decide to add getters and setters to the object, but you're mindful that only the image field needs a setter. The image field is an array, so you need a way to add new images to the object after the object has been initialized. Once they're initiated, you only allow your items to be changed in limited ways and, in some instances, they don't need to be changed at all once instantiated. This change gives rise to this code:
+Writing it that way is not ideal though, all the details of the car are available to anyone with the developer console open. It seems incorrect that all those fields are visible to and manipulatable by any Tom, Dick or Harry - some things should remain hidden. You know your fellow collectors and can imagine how much they'd relish pointing out a fault in your collection, so you decide to protect the data and make the attributes private. The protection of internal class variables is by no means a bullet-proof way of avoiding your fellow collectors taking the Mickey, but it'll have to do. With this in mind, you decide to add getters and setters to the instantiated class, but you're mindful that only the image field needs a setter. The image field is an array, so you need a way to add new images to the object after the object has been initialized, so you add `add_image`. Once they're created, you only allow your items to be changed in limited ways and, in some instances, they don't need to be changed at all once instantiated. This change gives rise to [this code](https://github.com/annoyingmouse/class_examples/blob/main/js/MatchboxCar.js):
 
 ```javascript
 /**
@@ -113,7 +113,7 @@ function MatchboxCar(id, model, num, brand, year, location, description) {
 };
 ```
 
-Having classes like this is all well and good, but what do you do with them once you've got them. Well, the purpose of the script is to show off your collection, so you need to display them. You decide to add a function (these are sometimes called methods in OOP) called "display" to the prototype of your object. This function is called with a target, so you can define where the items should be inserted within the DOM. This is shown in below:
+Having classes like this is all well and good, but what do you do with them once you've got them. Well, the purpose of the script is to show off your collection, so you need to display them. You decide to add a function (these are sometimes called methods in OOP) called "display" to the prototype of your object. This function is called with a target, so you can define where the items should be inserted within the Document Object Model (DOM). This is shown in below:
 
 ```javascript
 /**
@@ -320,7 +320,7 @@ All is well and good, but you've been offered another collector's collection of 
 
 After getting over your shock, you clock that it's not all that bad and decide to expand your collection and include the new models. This lack of discernment also opens up a whole new avenue for your obsession to go down. But what to do about your Database and lovely JavaScript class. Displaying Dinky cars using your MatchboxCar class seems wrong, and there is the odd difference to take into account too. The problem of the Database is easy enough to overcome as you add another field for the maker, and maybe another for the new number (more of which later).
 
-What to do about displaying them, though? You could create a DinkyCar class, but that would duplicate significant chunks of the code from MatchboxCar. Instead, you decide that you need an ancestor class called ToyCar from which both the MatchboxCar and DinkyCar inherit some variables and functions. Those classes with specific variables and functions can add them as required.
+What to do about displaying them, though? You could create a DinkyCar class, but that would duplicate significant chunks of the code from MatchboxCar. Instead, you decide that you need an ancestor class called [ToyCar](https://github.com/annoyingmouse/class_examples/blob/main/js/ToyCar.js) from which both the MatchboxCar and DinkyCar inherit some variables and functions. Those classes with specific variables and functions can add them as required.
 
 ```javascript
 /**
@@ -596,9 +596,9 @@ DinkyCar.prototype.createDefinitionList = function(target) {
 
 You've managed to include the four main concepts of OOP in the development of your ToyCar class. You've **encapsulated** the variables and functions within several classes. You've **abstracted** the variables of the object; protecting those variables which need to remain private. Your child classes **inherit** from a parent class. Finally, you've created some **polymorphism** in that both the MatchboxCar and DinkyCar classes override the `createHeader` stub function of the ToyCar class. Smart old stick aren't you?
 
-The above approach should work in many, if not all, browsers. But ES2016, and later, introduced some syntactic sugar to JS classes, and we'll look at refactoring our final iteration now.
+The above approach should work in many, if not all, browsers. But ES2016, and later, introduced some syntactic sugar to JS classes, and we'll look at refactoring our final [iteration now](https://github.com/annoyingmouse/class_examples/blob/main/js/ToyCarClass.js).
 
-We can use the `#` prefix to denote private variables rather than creating getters and setters - though we do need to be aware that ancestors of our parent class will still need to access those private variables using a getter. This method will save a significant amount of code but does mean we need to be cautious. While as this hash notation has not yet been accepted into the standard it is widely used, and [many JavaScript engines have adopted it](https://www.sitepoint.com/javascript-private-class-fields/).
+We use the [`#`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) prefix to denote private variables rather than creating getters and setters - though we do need to be aware that ancestors of our parent class will still need to access those private variables using a getter. This method will save a significant amount of code, but does mean we need to be cautious. While the hash notation has not yet been accepted into the standard, it is widely used, and [many JavaScript engines have adopted it](https://www.sitepoint.com/javascript-private-class-fields/).
 
 ```javascript
 class ToyCar {
@@ -653,8 +653,8 @@ class ToyCar {
     </dl>
   `
 
-  createCarousel = () =>
-      `<div class="carousel slide" data-ride="carousel" id="Model${this.#id}">
+  createCarousel = () => `
+    <div class="carousel slide" data-ride="carousel" id="Model${this.#id}">
       <div class="carousel-inner">
         ${this.#images.map((img, i) => `
           <div class="${!i ? 'carousel-item active' : 'carousel-item'}">
@@ -724,7 +724,7 @@ class DinkyCar extends ToyCar {
   createDefinitionList = () => `
     <dl>
       ${this.createDefinitionPair('Number', this.num)}
-      ${this.createDefinitionPair('Number', this.#num_new)}
+      ${this.createDefinitionPair('Re-numbered', this.#num_new)}
       ${this.createDefinitionPair('Brand', this.brand)}
       ${this.createDefinitionPair('Made in', this.location)}
     </dl>
@@ -734,12 +734,16 @@ class DinkyCar extends ToyCar {
 
 We can also make use of template literals to remove the imperative style of creating and manipulating DOM elements. Rather than use [`append`](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append) or [`appendChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) as we have previously, we can instead use [`insertAdjacentHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML) meaning we can avoid [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) manipulation. Quite apart from saving significant amounts of imperative code, this method allows much more readable code - you can understand what's happening simply by reading the code.
 
-We're also taking advantage of a shortcode for using if by using the logical AND ([`&&`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND)) to decide if something should be displayed, as we did in the previous iteration. This method of determining the conditional rendering of elements seems to have [stemmed from React](https://reactjs.org/docs/conditional-rendering.html) and takes advantage of the fact that statements are evaluated from left to right. If the first condition resolves to true, then the following code is invoked.
+We're also taking advantage of a shortcode for replacing the `if` operator by using the logical AND ([`&&`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND)) to decide if something should be displayed, as we did in the previous iteration. This method of determining the conditional rendering of elements seems to have [stemmed from React](https://reactjs.org/docs/conditional-rendering.html) and takes advantage of the fact that statements are evaluated from left to right. If the first condition resolves to true, then the following code is invoked.
 
-That's not to say that we don't take advantage of the tertiary operator also. The method used in the preceding class failed when it came to rendering DT/DD pairs of elements with null values, and I can only think that that was down to something about the getters in the parent class. This issue is worth further research.
+That's not to say that we don't take advantage of the tertiary operator also. The `createDefinitionList` method failed when it came to rendering DT/DD pairs of elements with null values, and I can only think that that was down to something about the getters in the parent class. This issue is worth further research.
 
-The MatchboxCar class, which extends or inherits from ToyCar, plays fast and loose with its arguments as we only need to pass a subset of the initial constructor arguments to the parent class, all the while retaining the first argument for the manufacturer variable. Similar occurs in the DinkyCar class, but in that instance, the `new_num` variable is nested within the arguments, so we take a more traditional approach to its super construction.
+The MatchboxCar class, which extends or inherits from ToyCar, plays fast and loose with its arguments as we only need to pass a subset of the initial constructor arguments to the parent class, all the while retaining the first argument - for the manufacturer variable. DinkyCar class also calls the ToyCar constructor, but in that instance, the `new_num` variable is nested within the arguments, so we take a more traditional approach to passing arguments to its super constructor.
 
-We can take advantage of [Export and Import](https://javascript.info/import-export) directives to further improve the legibility of our code. If we split up our classes into separate files, then we can export and import them only as and when required. We do need to be careful to tell the browser to be patient though, so we can inform the JavaScript engine that we're working with modules by using the type attribute on the script element and setting it to the type `module`. This modularisation does lead to far more clean looking code but will fail on earlier browsers so it might be worth using something like [rollup](https://rollupjs.org/guide/en/) - but as things stand your lovely code is only going to work well on Chrome. Firefox doesn't yet support private fields, you see - I dare say it will soon, but at present, it doesn't. Fingers crossed for the future though!
+We can take advantage of [Export and Import](https://javascript.info/import-export) directives to further improve the legibility of our code. If we [split up our classes into separate files](https://github.com/annoyingmouse/class_examples/tree/main/classes), then we can export and import them only as and when required. We do need to be careful to tell the browser to be patient though, so we can inform the JavaScript engine that we're working with modules by using the type attribute on the script element and setting it to the type `module`. This modularisation does lead to far more clean looking code, but will fail on earlier browsers, so it might be worth using something like [rollup](https://rollupjs.org/guide/en/) - but as things stand this lovely code is only going to work well on Chrome. Firefox doesn't yet support private fields, you see - I dare say it will soon, but at present, it doesn't. Fingers crossed for the future though!
 
-I hope you've enjoyed reading this as much as I have enjoyed writing it - it's going to be a chapter in my next book, but I thought it'd work well as a standalone piece in its own right. The working code is on [repl.it](https://repl.it/@annoyingmouse/ES5-Class-Example) so please do have a play. I've come an awful long way since answering, "OOP is a solution looking for a problem". Something I said when asked to explain what OOP was way back when in an interview - what a plonker! We've looked at the four main Object-oriented concepts ([as explained to a 6-year-old](https://www.educative.io/edpresso/object-oriented-concepts-as-explained-to-a-6-year-old))
+I've spent an entertaining weekend figuring out how to use Rollup and Babel to create a bundled file which will work on IE11 and other browsers. IE11 does not support the [details/summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) combination though, so I've included some CSS and a [jQuery plugin](https://mathiasbynens.be/notes/html5-details-jquery) by Mathias Bynens which will only be loaded if the user visits the page in IE11. All other evergreen browsers should also have no issues with the private fields or methods used, as [Babel](https://babeljs.io) will transpile our bleeding-edge JavaScript into conformant JavaScript. I wouldn't say I like this approach, but in this instance, the weekend was well spent as this should provide me with a boilerplate solution for future projects. Feel free to borrow the same approach if it helps you. The minimal [`package.json`](https://github.com/annoyingmouse/class_examples/blob/main/package.json), [`rollup.config.js`](https://github.com/annoyingmouse/class_examples/blob/main/rollup.config.js) and [`bable.config.js`](https://github.com/annoyingmouse/class_examples/blob/main/babel.config.js) files in the [repository](https://github.com/annoyingmouse/class_examples) should set you straight.
+
+I hope you've enjoyed reading this as much as I have enjoyed writing it - it's going to be a chapter in my next book, but I thought it'd work well as a standalone piece in its own right. The code is on (GitHub)[https://github.com/annoyingmouse/class_examples] and the working solution is on [repl.it](https://classexamples--annoyingmouse.repl.co) so please do have a play. I've come an awful long way since answering, "OOP is a solution looking for a problem". Something I said when asked to explain what OOP was way back when in an interview - what a plonker! We've looked at the four main Object-oriented concepts ([as explained to a 6-year-old](https://www.educative.io/edpresso/object-oriented-concepts-as-explained-to-a-6-year-old)).
+
+I've got to thank both Dr Magdalena Pietka-Eddleston (The Evil Doctor Magma) and Paweł Dawczak for their advice while reading this work, they've both been really helpful and have made this much more understandable. The joys of a 70's education mean that I know nothing of the rules of English in a formal sense, knowing people who actually understand the rules is unbelievably helpful!
