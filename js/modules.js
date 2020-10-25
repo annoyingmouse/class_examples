@@ -4,11 +4,11 @@
  * or (with rollup.config.js): `rollup --config`
  * or (now with npm): npm run build
  */
-import {MatchboxCar} from './classes/MatchboxCar.js'
-import {DinkyCar} from './classes/DinkyCar.js'
+import { MatchboxCar } from './../classes/MatchboxCar.js'
+import { DinkyCar } from './../classes/DinkyCar.js'
 
 
-var javalin = new MatchboxCar(
+const javalin = new MatchboxCar(
     'Matchbox', // manufacturer
     '0', // id
     'AMX Javalin', // model
@@ -23,7 +23,7 @@ javalin.add_image('https://dummyimage.com/378x385')
 javalin.add_image('https://dummyimage.com/378')
 javalin.display('collection')
 
-var FordGroup6 = new MatchboxCar(
+const FordGroup6 = new MatchboxCar(
     'Matchbox', // manufacturer
     '1', // id
     'Ford Group 6', // model
@@ -35,7 +35,7 @@ var FordGroup6 = new MatchboxCar(
     ['https://dummyimage.com/211x209', 'https://dummyimage.com/211', 'https://dummyimage.com/211x218']
 ).display('collection')
 
-var FordGT = new MatchboxCar(
+const FordGT = new MatchboxCar(
     'Matchbox', // manufacturer
     '2', // id
     'Ford G.T.', // model
@@ -50,7 +50,7 @@ FordGT.add_image('https://dummyimage.com/347x337')
 FordGT.add_image('https://dummyimage.com/347x355')
 FordGT.display('collection')
 
-var MerryweatherMarquisFireEngine = new MatchboxCar(
+const MerryweatherMarquisFireEngine = new MatchboxCar(
     'Matchbox', // manufacturer
     '3', // id
     'Merryweather Marquis Fire Engine', // model
@@ -65,7 +65,7 @@ MerryweatherMarquisFireEngine.add_image('https://dummyimage.com/435x437')
 MerryweatherMarquisFireEngine.add_image('https://dummyimage.com/435')
 MerryweatherMarquisFireEngine.display('collection')
 
-var LotusEuropa = new MatchboxCar(
+const LotusEuropa = new MatchboxCar(
     'Matchbox', // manufacturer
     '4', // id
     'Lotus Europa', // model
@@ -80,7 +80,7 @@ LotusEuropa.add_image('https://dummyimage.com/316')
 LotusEuropa.add_image('https://dummyimage.com/316x317')
 LotusEuropa.display('collection')
 
-var ChevroletCorvette = new MatchboxCar(
+const ChevroletCorvette = new MatchboxCar(
     'Matchbox', // manufacturer
     '5', // id
     'Chevrolet Corvette', // model
@@ -95,7 +95,7 @@ ChevroletCorvette.add_image('https://dummyimage.com/316')
 ChevroletCorvette.add_image('https://dummyimage.com/316x317')
 ChevroletCorvette.display('collection')
 
-var rileySaloon = new DinkyCar(
+const rileySaloon = new DinkyCar(
     'Dinky', // manufacturer
     '6', // id
     'Riley Saloon', // model
@@ -108,7 +108,7 @@ var rileySaloon = new DinkyCar(
     ['https://dummyimage.com/388x380', 'https://dummyimage.com/388x395', 'https://dummyimage.com/388']
 ).display('collection')
 
-var foden8WheelWagon = new DinkyCar(
+const foden8WheelWagon = new DinkyCar(
     'Dinky', // manufacturer
     '7', // id
     'Foden 8 Wheel Wagon', // model
