@@ -1,4 +1,4 @@
-import {ToyCar} from './ToyCar.js'
+import { ToyCar } from './ToyCar.js'
 
 /**
  * Class representing a Dinky toy car
@@ -23,26 +23,26 @@ export class DinkyCar extends ToyCar {
    * @param {string} description - A description of the model
    */
   constructor(
-      manufacturer,
+    manufacturer,
+    id,
+    model,
+    num,
+    num_new,
+    brand,
+    year,
+    location,
+    description,
+    images
+  ) {
+    super(
       id,
       model,
       num,
-      num_new,
       brand,
       year,
       location,
       description,
       images
-  ) {
-    super(
-        id,
-        model,
-        num,
-        brand,
-        year,
-        location,
-        description,
-        images
     )
     this.#manufacturer = manufacturer
     this.#num_new = num_new
@@ -59,13 +59,18 @@ export class DinkyCar extends ToyCar {
   `
 
   /**
+   * Returns true if the model has a number, a new number, a brand or a locations
+   */
+  hasDetails = () => this.num || this.#num_new || this.brand || this.location
+
+  /**
    * Creates a definition list, overrides the method inherited from ToyCar
    * @returns {string} - the dl with associated dt/dd pairs (Dinky cars might have two numbers)
    */
-  createDefinitionList = () => `
+  createDefinitionList = () => this.hasDetails() && `
     <dl>
       ${this.createDefinitionPair('Number', this.num)}
-      ${this.createDefinitionPair('Number', this.#num_new)}
+      ${this.createDefinitionPair('Re-numbered', this.#num_new)}
       ${this.createDefinitionPair('Brand', this.brand)}
       ${this.createDefinitionPair('Made in', this.location)}
     </dl>

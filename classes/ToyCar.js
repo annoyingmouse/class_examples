@@ -26,15 +26,15 @@ export class ToyCar {
    * @param {array} images - An array of images of the model
    */
   constructor(
-      id,
-      model,
-      num,
-      brand,
-      year,
-      location,
-      description,
-      images = []
-  ){
+    id,
+    model,
+    num,
+    brand,
+    year,
+    location,
+    description,
+    images = []
+  ) {
     this.#id = id
     this.#model = model
     this.#num = num
@@ -49,7 +49,7 @@ export class ToyCar {
    * Get the number of the model
    * @returns {string} - The number of the model
    */
-  get num() {
+  get num () {
     return this.#num
   }
 
@@ -57,7 +57,7 @@ export class ToyCar {
    * Get the brand of the model
    * @returns {string} - The brand of the model
    */
-  get brand() {
+  get brand () {
     return this.#brand
   }
 
@@ -65,7 +65,7 @@ export class ToyCar {
    * Get the place where the model was made
    * @returns {string} - Where the model was made
    */
-  get location() {
+  get location () {
     return this.#location
   }
 
@@ -73,7 +73,7 @@ export class ToyCar {
    * Adds an image to the #images array of the model
    * @param {string} url - The url of an image of the model.
    */
-  add_image(url){
+  add_image (url) {
     this.#images.push(url)
   }
 
@@ -95,10 +95,15 @@ export class ToyCar {
   ` : ``
 
   /**
+   * Returns true if the model has a number, a brand or a locations
+   */
+  hasDetails = () => this.#num || this.#brand || this.#location
+
+  /**
    * Creates a definition list
    * @returns {string} - the dl with associated dt/dd pairs
    */
-  createDefinitionList = () => `
+  createDefinitionList = () => this.hasDetails() && `
     <dl>
       ${this.createDefinitionPair('Number', this.#num)}
       ${this.createDefinitionPair('Brand', this.#brand)}
@@ -128,7 +133,7 @@ export class ToyCar {
    * https://getbootstrap.com/docs/4.0/components/card/
    * @param {string} target - The id of the DOM element to which to attach to 'card'
    */
-  display(target) {
+  display (target) {
     const markup = `
       <div class="card">
         ${this.createHeader()}

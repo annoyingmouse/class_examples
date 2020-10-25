@@ -2152,10 +2152,16 @@
 	      return dd ? "\n    <dt>".concat(dt, "</dt>\n    <dd>").concat(dd, "</dd>\n  ") : "";
 	    }.bind(this));
 
+	    _defineProperty(this, "hasDetails", function () {
+	      _newArrowCheck(this, _this);
+
+	      return _classPrivateFieldGet(this, _num) || _classPrivateFieldGet(this, _brand) || _classPrivateFieldGet(this, _location);
+	    }.bind(this));
+
 	    _defineProperty(this, "createDefinitionList", function () {
 	      _newArrowCheck(this, _this);
 
-	      return "\n    <dl>\n      ".concat(this.createDefinitionPair('Number', _classPrivateFieldGet(this, _num)), "\n      ").concat(this.createDefinitionPair('Brand', _classPrivateFieldGet(this, _brand)), "\n      ").concat(this.createDefinitionPair('Made in', _classPrivateFieldGet(this, _location)), "\n    </dl>\n  ");
+	      return this.hasDetails() && "\n    <dl>\n      ".concat(this.createDefinitionPair('Number', _classPrivateFieldGet(this, _num)), "\n      ").concat(this.createDefinitionPair('Brand', _classPrivateFieldGet(this, _brand)), "\n      ").concat(this.createDefinitionPair('Made in', _classPrivateFieldGet(this, _location)), "\n    </dl>\n  ");
 	    }.bind(this));
 
 	    _defineProperty(this, "createCarousel", function () {
@@ -2360,10 +2366,16 @@
 	      return "\n    <div class=\"card-header text-white bg-danger font-weight-bold\">\n      ".concat(_classPrivateFieldGet(_assertThisInitialized(_this), _manufacturer$1), "\n    </div>\n  ");
 	    }.bind(this));
 
+	    _defineProperty(_assertThisInitialized(_this), "hasDetails", function () {
+	      _newArrowCheck(this, _this2);
+
+	      return _this.num || _classPrivateFieldGet(_assertThisInitialized(_this), _num_new) || _this.brand || _this.location;
+	    }.bind(this));
+
 	    _defineProperty(_assertThisInitialized(_this), "createDefinitionList", function () {
 	      _newArrowCheck(this, _this2);
 
-	      return "\n    <dl>\n      ".concat(_this.createDefinitionPair('Number', _this.num), "\n      ").concat(_this.createDefinitionPair('Number', _classPrivateFieldGet(_assertThisInitialized(_this), _num_new)), "\n      ").concat(_this.createDefinitionPair('Brand', _this.brand), "\n      ").concat(_this.createDefinitionPair('Made in', _this.location), "\n    </dl>\n  ");
+	      return _this.hasDetails() && "\n    <dl>\n      ".concat(_this.createDefinitionPair('Number', _this.num), "\n      ").concat(_this.createDefinitionPair('Re-numbered', _classPrivateFieldGet(_assertThisInitialized(_this), _num_new)), "\n      ").concat(_this.createDefinitionPair('Brand', _this.brand), "\n      ").concat(_this.createDefinitionPair('Made in', _this.location), "\n    </dl>\n  ");
 	    }.bind(this));
 
 	    _classPrivateFieldSet(_assertThisInitialized(_this), _manufacturer$1, manufacturer);
