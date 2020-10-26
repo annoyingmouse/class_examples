@@ -11,6 +11,8 @@ You could output that Database in the form of a table; each item would be a row 
 
 You know the items in your collection very well, you've spent some time thinking about them and collecting them after all. And your work on the normalized Database means that you know what their characteristics are as well. You've heard about Object-Oriented Programming (OOP), so why not turn your hand to instantiating each item in your collection as an object — now that we're getting serious, let's decide what you're collecting. To make things as easy as possible, let's decide upon matchbox toy cars.
 
+This process of using a class to create concrete objects is called instantiation. The class acts like template for the object, with the object being an instance of the class.
+
 To some extent identifying matchbox cars is dead easy, they have writing on the bottom after all. There's the name of the vehicle, the year of production; sometimes there's a number. There is also where they were built. You have some duplicates, so you'll need a field for a description so that you can distinguish between the copies. You've invested some time taking pictures and uploading them to an S3 bucket, some you've even taken multiple images of, so you'll need an array of image URIs as well, which you can display in a slideshow. That array might be empty though as you don't take a picture immediately after cataloguing them.
 
 In the bad old days, JavaScript wasn't a class-based object-oriented language (and perhaps it still isn't), it was prototype-based, but what does that mean? JS classes used to be written as functions so that you could write your Matchbox car like [this](https://github.com/annoyingmouse/class_examples/blob/main/js/MatchboxCar_original.js):
