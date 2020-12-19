@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["es2020", "DOM"],
+    "moduleResolution": "node",
+    "module": "ES2015",
+    "allowJs": true,
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "strict": true
+  },
+  "include": ["classes/*.js", "js/*.js"],
+  "exclude": ["node_modules"]
+}
