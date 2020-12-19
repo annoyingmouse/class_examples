@@ -21,6 +21,7 @@ export class DinkyCar extends ToyCar {
    * @param {number} year - The year of production
    * @param {string} location - Where the model was made
    * @param {string} description - A description of the model
+   * @param {Array<string>} images - A collection of images of the model
    */
   constructor(
     manufacturer,

@@ -12,18 +12,19 @@ export class ToyCar {
   #year
   #location
   #description
+  /**@type {Array<String>} */
   #images
 
   /**
    * Constructs a new instance of the ToyCar class
-   * @param {string} id - The unique from the Database
-   * @param {string} model - The name of the model
-   * @param {string} num - The number of the model
-   * @param {string} brand - The brand of the model
-   * @param {number} year - The year of production
-   * @param {string} location - Where the model was made
-   * @param {string} description - A description of the model
-   * @param {array} images - An array of images of the model
+   * @param {String} id - The unique identifier from the Database
+   * @param {String} model - The name of the model
+   * @param {String} num - The number of the model
+   * @param {String} brand - The brand of the model
+   * @param {Number} year - The year of production
+   * @param {String} location - Where the model was made
+   * @param {String} description - A description of the model
+   * @param {Array<String>} images - An array of images of the model
    */
   constructor(
     id,
@@ -33,7 +34,7 @@ export class ToyCar {
     year,
     location,
     description,
-    images = []
+    images
   ) {
     this.#id = id
     this.#model = model
@@ -47,7 +48,7 @@ export class ToyCar {
 
   /**
    * Get the number of the model
-   * @returns {string} - The number of the model
+   * @returns {string} - The number of the modeles5
    */
   get num () {
     return this.#num
@@ -79,15 +80,15 @@ export class ToyCar {
 
   /**
    * Stub function to be overwritten by children
-   * @returns {string}
+   * @returns {String}
    */
   createHeader = () => ``
 
   /**
    * Creates a dt/dd pair for the given values if dd has a value
-   * @param {string} dt - The definition term
-   * @param {string} dd - The definition description
-   * @returns {string} - the dt/dd pair if there is a valid value for the 'dd', else an empty string
+   * @param {String} dt - The definition term
+   * @param {String} dd - The definition description
+   * @returns {String} - the dt/dd pair if there is a valid value for the 'dd', else an empty string
    */
   createDefinitionPair = (dt, dd) => dd ? `
     <dt>${dt}</dt>
@@ -114,12 +115,12 @@ export class ToyCar {
   /**
    * Generates a carousel of images from the images in the Class, uses Bootstrap 4's Carousel:
    * https://getbootstrap.com/docs/4.0/components/carousel/
-   * @returns {string} - a carousel of images
+   * @returns {String} - a carousel of images
    */
   createCarousel = () => `
     <div class="carousel slide" data-ride="carousel" id="Model${this.#id}">
       <div class="carousel-inner">
-        ${this.#images.map((img, i) => `
+        ${this.#images.map((/**@type {String} */ img, /**@type {Number} */ i) => `
           <div class="${!i ? 'carousel-item active' : 'carousel-item'}">
             <img class="d-block w-100" src="${img}"/>
           </div>
@@ -131,7 +132,7 @@ export class ToyCar {
   /**
    * Generates a Bootstrap 4 card with details of the toy car and attaches it to the target element:
    * https://getbootstrap.com/docs/4.0/components/card/
-   * @param {string} target - The id of the DOM element to which to attach to 'card'
+   * @param {String} target - The id of the DOM element to which to attach to 'card'
    */
   display (target) {
     const markup = `
@@ -155,6 +156,6 @@ export class ToyCar {
       </div>
     `
     const domTarget = document.getElementById(target)
-    domTarget.insertAdjacentHTML('afterbegin', markup)
+    domTarget && domTarget.insertAdjacentHTML('afterbegin', markup)
   }
 }

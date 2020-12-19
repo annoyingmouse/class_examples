@@ -11,11 +11,38 @@ export class MatchboxCar extends ToyCar {
 
   /**
    * Constructs a new instance of the MatchboxCar class using the ToyCar class
-   * @param args - Similar to the args for ToyCar but with an extra for manufacturer. A destructured list of variables.
+   * @param {string} manufacturer - The maker of the model
+   * @param {string} id - The unique from the Database
+   * @param {string} model - The name of the model
+   * @param {string} num - The number of the model
+   * @param {string} brand - The brand of the model
+   * @param {number} year - The year of production
+   * @param {string} location - Where the model was made
+   * @param {string} description - A description of the model
+   * @param {Array<string>} images - A collection of images of the model
    */
-  constructor(...args) {
-    super(...args.splice(1))
-    this.#manufacturer = [...args].shift()
+  constructor(
+    manufacturer,
+    id,
+    model,
+    num,
+    brand,
+    year,
+    location,
+    description,
+    images
+  ) {
+    super(
+      id,
+      model,
+      num,
+      brand,
+      year,
+      location,
+      description,
+      images
+    )
+    this.#manufacturer = manufacturer
   }
 
   /**
