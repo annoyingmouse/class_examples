@@ -1,30 +1,30 @@
-/**
- * Class representing a generic toy car
- */
 export class ToyCar {
-  /**
-   * Private properties
-   */
+  /**@type {string}*/
   #id
+  /**@type {string}*/
   #model
+  /**@type {string}*/
   #num
+  /**@type {string}*/
   #brand
+  /**@type {number}*/
   #year
+  /**@type {string}*/
   #location
+  /**@type {string}*/
   #description
-  /**@type {Array<String>} */
+  /**@type {Array<string>} */
   #images
 
   /**
-   * Constructs a new instance of the ToyCar class
-   * @param {String} id - The unique identifier from the Database
-   * @param {String} model - The name of the model
-   * @param {String} num - The number of the model
-   * @param {String} brand - The brand of the model
-   * @param {Number} year - The year of production
-   * @param {String} location - Where the model was made
-   * @param {String} description - A description of the model
-   * @param {Array<String>} images - An array of images of the model
+   * @param {string} id
+   * @param {string} model
+   * @param {string} num
+   * @param {string} brand
+   * @param {number} year
+   * @param {string} location
+   * @param {string} description
+   * @param {Array<string>} images
    */
   constructor(
     id,
@@ -47,48 +47,42 @@ export class ToyCar {
   }
 
   /**
-   * Get the number of the model
-   * @returns {string} - The number of the modeles5
+   * @returns {string}
    */
   get num () {
     return this.#num
   }
 
   /**
-   * Get the brand of the model
-   * @returns {string} - The brand of the model
+   * @returns {string}
    */
   get brand () {
     return this.#brand
   }
 
   /**
-   * Get the place where the model was made
-   * @returns {string} - Where the model was made
+   * @returns {string}
    */
   get location () {
     return this.#location
   }
 
   /**
-   * Adds an image to the #images array of the model
-   * @param {string} url - The url of an image of the model.
+   * @param {string} url
    */
   add_image (url) {
     this.#images.push(url)
   }
 
   /**
-   * Stub function to be overwritten by children
-   * @returns {String}
+   * @returns {string}
    */
   createHeader = () => ``
 
   /**
-   * Creates a dt/dd pair for the given values if dd has a value
-   * @param {String} dt - The definition term
-   * @param {String} dd - The definition description
-   * @returns {String} - the dt/dd pair if there is a valid value for the 'dd', else an empty string
+   * @param {string} dt
+   * @param {string} dd
+   * @returns {string}
    */
   createDefinitionPair = (dt, dd) => dd ? `
     <dt>${dt}</dt>
@@ -96,26 +90,23 @@ export class ToyCar {
   ` : ``
 
   /**
-   * Returns true if the model has a number, a brand or a locations
+   * @returns {boolean}
    */
-  hasDetails = () => this.#num || this.#brand || this.#location
+  hasDetails = () => !!this.#num || !!this.#brand || !!this.#location
 
   /**
-   * Creates a definition list
-   * @returns {string} - the dl with associated dt/dd pairs
+   * @returns {string}
    */
-  createDefinitionList = () => this.hasDetails() && `
+  createDefinitionList = () => this.hasDetails() ? `
     <dl>
       ${this.createDefinitionPair('Number', this.#num)}
       ${this.createDefinitionPair('Brand', this.#brand)}
       ${this.createDefinitionPair('Made in', this.#location)}
     </dl>
-  `
+  ` : ``
 
   /**
-   * Generates a carousel of images from the images in the Class, uses Bootstrap 4's Carousel:
-   * https://getbootstrap.com/docs/4.0/components/carousel/
-   * @returns {String} - a carousel of images
+   * @returns {String}
    */
   createCarousel = () => `
     <div class="carousel slide" data-ride="carousel" id="Model${this.#id}">
@@ -130,9 +121,7 @@ export class ToyCar {
   `
 
   /**
-   * Generates a Bootstrap 4 card with details of the toy car and attaches it to the target element:
-   * https://getbootstrap.com/docs/4.0/components/card/
-   * @param {String} target - The id of the DOM element to which to attach to 'card'
+   * @param {String} target
    */
   display (target) {
     const markup = `

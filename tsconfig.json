@@ -8,8 +8,11 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "target": "ES6",
-    "strict": true
+    "strict": true,
+    "declarationDir": "types",
+    "declaration": true
   },
+  "types": "./types/jsdoc-typing.d.ts",
   "include": ["classes/*.js", "js/modules.js"],
   "exclude": ["node_modules"]
 }

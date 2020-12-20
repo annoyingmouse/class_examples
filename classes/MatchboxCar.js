@@ -1,25 +1,19 @@
 import {ToyCar} from './ToyCar.js'
 
-/**
- * Class representing a Matchbox toy car
- */
 export class MatchboxCar extends ToyCar {
-  /**
-   * Private property, not in ToyCar
-   */
+  /**@type {string}*/
   #manufacturer
 
   /**
-   * Constructs a new instance of the MatchboxCar class using the ToyCar class
-   * @param {string} manufacturer - The maker of the model
-   * @param {string} id - The unique from the Database
-   * @param {string} model - The name of the model
-   * @param {string} num - The number of the model
-   * @param {string} brand - The brand of the model
-   * @param {number} year - The year of production
-   * @param {string} location - Where the model was made
-   * @param {string} description - A description of the model
-   * @param {Array<string>} images - A collection of images of the model
+   * @param {string} manufacturer
+   * @param {string} id
+   * @param {string} model
+   * @param {string} num
+   * @param {string} brand
+   * @param {number} year
+   * @param {string} location
+   * @param {string} description
+   * @param {Array<string>} images
    */
   constructor(
     manufacturer,
@@ -46,8 +40,7 @@ export class MatchboxCar extends ToyCar {
   }
 
   /**
-   * Returns a formatted string indicating the manufacturer of the model, overrides the method inherited from ToyCar
-   * @returns {string} - a green header element displaying the manufacturer
+   * @returns {string}
    */
   createHeader = () => `
     <div class="card-header text-white bg-success font-weight-bold">

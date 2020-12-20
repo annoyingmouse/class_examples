@@ -1,27 +1,22 @@
 import { ToyCar } from './ToyCar.js'
 
-/**
- * Class representing a Dinky toy car
- */
 export class DinkyCar extends ToyCar {
-  /**
-   * Private properties, not in ToyCar
-   */
+  /**@type {string}*/
   #num_new
+  /**@type {string}*/
   #manufacturer
 
   /**
-   * Constructs a new instance of the DinkyCar class using the ToyCar class
-   * @param {string} manufacturer - The maker of the model
-   * @param {string} id - The unique from the Database
-   * @param {string} model - The name of the model
-   * @param {string} num - The number of the model
-   * @param {string} num_new - The number of the model after 1954
-   * @param {string} brand - The brand of the model
-   * @param {number} year - The year of production
-   * @param {string} location - Where the model was made
-   * @param {string} description - A description of the model
-   * @param {Array<string>} images - A collection of images of the model
+   * @param {string} manufacturer
+   * @param {string} id
+   * @param {string} model
+   * @param {string} num
+   * @param {string} num_new
+   * @param {string} brand
+   * @param {number} year
+   * @param {string} location
+   * @param {string} description
+   * @param {Array<string>} images
    */
   constructor(
     manufacturer,
@@ -50,8 +45,7 @@ export class DinkyCar extends ToyCar {
   }
 
   /**
-   * Returns a formatted string indicating the manufacturer of the model, overrides the method inherited from ToyCar
-   * @returns {string} - a red header element displaying the manufacturer
+   * @returns {string}
    */
   createHeader = () => `
     <div class="card-header text-white bg-danger font-weight-bold">
@@ -60,20 +54,19 @@ export class DinkyCar extends ToyCar {
   `
 
   /**
-   * Returns true if the model has a number, a new number, a brand or a locations
+   * @returns {boolean}
    */
-  hasDetails = () => this.num || this.#num_new || this.brand || this.location
+  hasDetails = () => !!this.num || !!this.#num_new || !!this.brand || !!this.location
 
   /**
-   * Creates a definition list, overrides the method inherited from ToyCar
-   * @returns {string} - the dl with associated dt/dd pairs (Dinky cars might have two numbers)
+   * @returns {string}
    */
-  createDefinitionList = () => this.hasDetails() && `
+  createDefinitionList = () => this.hasDetails() ? `
     <dl>
       ${this.createDefinitionPair('Number', this.num)}
       ${this.createDefinitionPair('Re-numbered', this.#num_new)}
       ${this.createDefinitionPair('Brand', this.brand)}
       ${this.createDefinitionPair('Made in', this.location)}
     </dl>
-  `
+  ` : ``
 }
